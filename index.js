@@ -1,46 +1,72 @@
-function myEach(Collection, callback){
-
-    //collection = object or array
-    //determine whether the collection is an object or an array and, if it's an object, use a JavaScript Object method to create an array that contains the object's values. You then only need to write code that processes an array
-    //e.g. if(collection = object){
-    //object.keys...
-    //}
-    //iterates over collection, passing each element to the callback
-    //return the original collection
+function turnObjIntoArray(collection){
+    return Object.values(collection)
 }
 
+function myEach(collection, callback){
+    const newArray = turnObjIntoArray(collection);
+    for(let i = 0; i < (newArray.length); i++) {
+    callback(newArray[i])
+    }
+    return collection
+}
+
+
 function myMap(collection, callback){
-    //collection = obj or array
-    //pass each element to cb and create a new array that doesn't modify the original
-    //remember to initiate new variable to store new array
-    //return = new array
+    
+    const newArray = turnObjIntoArray(collection);
+    
+    let mappedArray = [];
+
+    for(let i = 0; i < (newArray.length); i++) {
+     mappedArray.push(callback(newArray[i]))
+    }
+
+    return mappedArray
 }
 
 function myReduce(collection, callback, acc){
-    //collection = obj or array
-    //iterates through collection and boils it down to a single value.
-    //acc starts at the value that's passed in as arg and is updated to return value of cb. If start value is not passed, use first value in collection
-    //cb receives 3 values - current acc, current element in collection and ref to entire collect4ion
-    //returns a single value
+    let newArray = turnObjIntoArray(collection);
+    if(!acc){
+        acc = newArray[0]
+        newArray = newArray.slice(1);
+    }
+
+     for(let i = 0; i < (newArray.length); i++) {
+      acc = callback(acc, newArray[i], newArray);
+  }
+  return acc;
 }
+
 
 function myFind(collection, predicate){
-    //collection = obj or array
-    //predicate = cb that returns true or false
+       
+    const newArray = turnObjIntoArray(collection);
+    for(let i = 0; i < (newArray.length); i++) {
+        if (predicate(newArray[i]))
+            return newArray[i]
+    }
+    
+}
+        //predicate = cb that returns true or false
     //checks each value in collection and returns 1st that = true -> predicate.
     //returns a single value
-}
+
 
 function myFilter(collection, predicate){
-    //collection = obj or array
-    //predicate = cb that returns true or false
-    //checks each value in the collection
+     const newArray = turnObjIntoArray(collection);
+     const filteredArr = [];
+     for (let i = 0; i < newArray.length; i++) {
+        if (predicate(newArray[i])) filteredArr.push(newArray[i]);
+    }
+    return filteredArr;
+    
     //returns an array of all values that pass the predicate (or empy array)
 }
 
 function mySize(collection){
-    //collection = obj or array
-    //return an integer - number of values in the collection (e.g. array.length)
+    const newArray = turnObjIntoArray(collection);
+    return newArray.length
+
 }
 
 //ARRAY FUNCTIONS
