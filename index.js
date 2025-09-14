@@ -71,13 +71,28 @@ function mySize(collection){
 
 //ARRAY FUNCTIONS
 
-function myFirst(array, [n]){
-    //[n]=an integer(optional)
-    //return - a single element or an array
-    // return first element of an array
-    //passing 'n' (e.g.3) will return the first 'n' (e.g. 3) elements of the array
+function myFirst(array, n){
+    if(!n) {return array[0]}
+    else {return array.slice(0,n)}
 }
 
-function myLast(array,[n]){
-    //reverse of above
+function myLast(array,n){
+    if(!n) {return array[array.length-1]}
+    else {return array.slice(array.length-n)}
+}
+
+function myKeys(object){
+    const arrayOfKeys = [];
+    for (let key in object){
+    arrayOfKeys.push(key);
+  }
+  return arrayOfKeys;
+}
+
+function myValues(object){
+    const arrayOfValues = [];
+    for (let key in object){
+    arrayOfValues.push(object[key]);
+  }
+  return arrayOfValues;
 }
